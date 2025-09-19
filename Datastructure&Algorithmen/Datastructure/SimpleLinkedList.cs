@@ -1,10 +1,11 @@
 ﻿using Common;
+using System.Security;
 
 namespace Datastructure
 {
     public class SimpleLinkedList<T>
     {
-        public Node<T> Head { get; set; } = null!;
+        public Node<T>? Head;
         public void AddLast(T data)
         {
             if (Head == null)
@@ -33,12 +34,12 @@ namespace Datastructure
             }
             return result;
         }
-        public bool Contains(T objectToFind)
+        public bool Contains(T toFind)
         {
             Node<T>? current = Head;
             while (current != null)
             {
-                if (current.Data != null && current.Data.Equals(objectToFind))
+                if (current.Data != null && current.Data.Equals(toFind))
                     return true;
                 current = current.Next;
             }

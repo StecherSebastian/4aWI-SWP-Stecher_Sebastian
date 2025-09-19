@@ -13,7 +13,7 @@ namespace DatastructureTests
         public void AddLast_AddObject_ReturnsObject()
         {
             Person person = new Person();
-            SimpleLinkedList<Person> linkedList = new SimpleLinkedList<Person>();
+            SimpleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person);
             Assert.That(linkedList.Head.Data, Is.EqualTo(person));
         }
@@ -21,7 +21,7 @@ namespace DatastructureTests
         public void GetAllNodes_AddObjects_ReturnsListNodes()
         {
             Person person = new Person();
-            SimpleLinkedList<Person> linkedList = new SimpleLinkedList<Person>();
+            SimpleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person);
             linkedList.AddLast(person);
             Assert.That(linkedList.GetAllNodes(), Is.EqualTo(new List<Person> { person, person }));
@@ -31,7 +31,7 @@ namespace DatastructureTests
         {
             Person person1 = new Person();
             Person person2 = new Person("first", "last");
-            SimpleLinkedList<Person> linkedList = new SimpleLinkedList<Person>();
+            SimpleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person1);
             linkedList.AddLast(person2);
             Assert.That(linkedList.Contains(person2), Is.True);
