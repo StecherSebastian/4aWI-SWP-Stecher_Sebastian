@@ -1,49 +1,46 @@
-﻿namespace Datastructure
+﻿using Common;
+
+namespace Datastructure
 {
-    public class SimpleLinkedList
+    public class SimpleLinkedList<T>
     {
-        public Node head = null!;
-        public void AddLast(object data)
+        public Node<T> Head { get; set; } = null!;
+        public void AddLast(T data)
         {
-            if (head == null)
+            if (Head == null)
             {
-                head = new Node();
-                Node toAdd = new Node();
-                toAdd.data = data;
-                head.next = toAdd;
+                Head = new Node<T>(data);
             }
             else
             {
-                Node toAdd = new Node();
-                toAdd.data = data;
-                Node? current = head;
-                while (current.next != null)
+                Node<T> toAdd = new Node<T>(data);
+                Node<T> current = Head;
+                while (current.Next != null)
                 {
-                    current = current.next;
+                    current = current.Next;
                 }
-                current.next = toAdd;
+                current.Next = toAdd;
             }
         }
-        public List<object> getAllNodes()
+        public List<T> GetAllNodes()
         {
-            List<object> result = new List<object>();
-            Node? current = head;
-            while (current.next != null)
+            List<T> result = new List<T>();
+            Node<T>? current = Head;
+            while (current != null)
             {
-                current = current.next;
-                result.Add(current.data);
+                result.Add(current.Data);
+                current = current.Next;
             }
             return result;
         }
-        public bool checkForObject(object objectToFind)
+        public bool Contains(T objectToFind)
         {
-            Node? current = head;
+            Node<T>? current = Head;
             while (current != null)
             {
-                if (current.data == objectToFind)
+                if (current.Data != null && current.Data.Equals(objectToFind))
                     return true;
-                else
-                    current = current.next;
+                current = current.Next;
             }
             return false;
         }
