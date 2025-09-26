@@ -4,5 +4,15 @@
     {
         public Node<T>? Next;
         public T Data = t;
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Node<T> other) return false;
+            else return EqualityComparer<T>.Default.Equals(Data, other.Data);
+        }
+        public override int GetHashCode()
+        {
+            if (Data == null) return 0;
+            else return EqualityComparer<T>.Default.GetHashCode(Data);
+        }
     }
 }

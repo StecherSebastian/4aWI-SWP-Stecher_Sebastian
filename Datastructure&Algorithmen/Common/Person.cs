@@ -1,4 +1,7 @@
-﻿namespace Datastructure
+﻿using Common;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Datastructure
 {
     public class Person
     {
@@ -68,6 +71,20 @@
             {
                 throw new ArgumentOutOfRangeException(nameof(birthdate), $"{nameof(birthdate)} must be in the past and cannot be today.");
             }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Person other) return false;
+            else return ID == other.ID
+                    && FirstName == other.FirstName
+                    && LastName == other.LastName
+                    && BirthDate == other.BirthDate
+                    && Age == other.Age
+                    && Gender == other.Gender;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ID, FirstName, LastName, BirthDate, Age, Gender);
         }
     }
 }

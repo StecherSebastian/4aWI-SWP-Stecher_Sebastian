@@ -4,23 +4,18 @@ namespace DatastructureTests
 {
     public class SimpleLinkedListUnitTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void AddLast_AddObject_ReturnsObject()
         {
-            Person person = new Person();
+            Person person = new("Sebastian");
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person);
-            Assert.That(linkedList.Head.Data, Is.EqualTo(person));
+            Assert.That(linkedList.Head?.Data, Is.EqualTo(person));
         }
         [Test]
         public void GetAllNodes_AddObjects_ReturnsListNodes()
         {
-            Person person = new Person();
+            Person person = new("Lukas");
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person);
             linkedList.AddLast(person);
@@ -29,8 +24,8 @@ namespace DatastructureTests
         [Test]
         public void Contains_ReturnsBool()
         {
-            Person person1 = new Person();
-            Person person2 = new Person("first", "last");
+            Person person1 = new("Matthias");
+            Person person2 = new("Florian");
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(person1);
             linkedList.AddLast(person2);
