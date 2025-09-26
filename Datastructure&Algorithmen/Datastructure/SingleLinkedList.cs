@@ -5,21 +5,19 @@ namespace Datastructure
     public class SingleLinkedList<T>
     {
         public Node<T>? Head;
+        public Node<T> Last = null!;
         public void AddLast(T data)
         {
             if (Head == null)
             {
                 Head = new Node<T>(data);
+                Last = Head;
             }
             else
             {
                 Node<T> toAdd = new Node<T>(data);
-                Node<T> current = Head;
-                while (current.Next != null)
-                {
-                    current = current.Next;
-                }
-                current.Next = toAdd;
+                Last.Next = toAdd;
+                Last = toAdd;
             }
         }
         public List<T> GetAllNodes()
