@@ -14,6 +14,40 @@ namespace DatastructureTests
             Assert.That(linkedList.Head?.Data, Is.EqualTo(person));
         }
         [Test]
+        public void InsertAfter_ReturnsObject()
+        {
+            Person person1 = new("Lukas");
+            Person person2 = new("Matthias");
+            Person person3 = new("Fleisch");
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(person1);
+            linkedList.AddLast(person2);
+            linkedList.InsertAfter(person1, person3);
+            Assert.That(linkedList.Head?.Next?.Data, Is.EqualTo(person3));
+        }
+        [Test]
+        public void InsertBefore_ReturnsObject()
+        {
+            Person person1 = new("Lukas");
+            Person person2 = new("Matthias");
+            Person person3 = new("Fleisch");
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(person1);
+            linkedList.AddLast(person2);
+            linkedList.InsertBefore(person2, person3);
+            Assert.That(linkedList.Head?.Next?.Data, Is.EqualTo(person3));
+        }
+        [Test]
+        public void InsertBefore_BeforeHead_ReturnsObject()
+        {
+            Person person1 = new("Lukas");
+            Person person2 = new("Matthias");
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(person1);
+            linkedList.InsertBefore(person1, person2);
+            Assert.That(linkedList.Head?.Data, Is.EqualTo(person2));
+        }
+        [Test]
         public void GetAllNodesData_AddObjects_ReturnsListObjects()
         {
             Person person = new("Lukas");

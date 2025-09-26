@@ -20,9 +20,34 @@ namespace Datastructure
                 Last = toAdd;
             }
         }
+        public void InsertAfter(T elementBefore, T elementToInsert)
+        {
+            Node<T>? nodeBefore = GetNode(elementBefore);
+            if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+        }
+        public void InsertBefore(T elementAfter, T elementToInsert)
+        {
+            if (Head != null && Head.Data != null && Head.Data.Equals(elementAfter))
+            {
+                Node<T> nodeToInsert = new(elementToInsert);
+                nodeToInsert.Next = Head;
+                Head = nodeToInsert;
+            }
+            else
+            {
+                Node<T>? nodeBefore = GetNodeBefore(elementAfter);
+                if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+            }
+        }
+        private void InsertNode(Node<T> nodeBefore, T elementToInsert)
+        {
+            Node<T> nodeToInsert = new(elementToInsert);
+            nodeToInsert.Next = nodeBefore.Next;
+            nodeBefore.Next = nodeToInsert;
+        }
         public List<T> GetAllNodesData()
         {
-            List<T> result = new List<T>();
+            List<T> result = new();
             Node<T>? current = Head;
             while (current != null)
             {
