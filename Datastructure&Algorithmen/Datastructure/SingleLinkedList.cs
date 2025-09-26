@@ -20,7 +20,7 @@ namespace Datastructure
                 Last = toAdd;
             }
         }
-        public List<T> GetAllNodes()
+        public List<T> GetAllNodesData()
         {
             List<T> result = new List<T>();
             Node<T>? current = Head;
@@ -30,6 +30,28 @@ namespace Datastructure
                 current = current.Next;
             }
             return result;
+        }
+        public Node<T>? GetNode(T toFind)
+        {
+            Node<T>? current = Head;
+            while (current != null)
+            {
+                if (current.Data != null && current.Data.Equals(toFind))
+                    return current;
+                current = current.Next;
+            }
+            return null;
+        }
+        public Node<T>? GetNodeBefore(T toFind)
+        {
+            Node<T>? current = Head;
+            while (current != null)
+            {
+                if (current.Next != null && current.Next.Data != null && current.Next.Data.Equals(toFind))
+                    return current;
+                current = current.Next;
+            }
+            return null;
         }
         public bool Contains(T toFind)
         {
