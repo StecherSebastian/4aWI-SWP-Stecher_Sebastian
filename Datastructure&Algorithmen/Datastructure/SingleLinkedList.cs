@@ -1,9 +1,8 @@
 ﻿using Common;
-using System.Security;
 
 namespace Datastructure
 {
-    public class SimpleLinkedList<T>
+    public class SingleLinkedList<T>
     {
         public Node<T>? Head;
         public void AddLast(T data)
