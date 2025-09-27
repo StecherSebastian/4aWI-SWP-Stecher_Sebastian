@@ -6,6 +6,18 @@ namespace DatastructureTests
     public class SimpleLinkedListUnitTests
     {
         [Test]
+        public void AddFirst_AddObjects_ReturnsObjects()
+        {
+            Person person1 = new("Sebastian");
+            Person person2 = new("Matthias");
+            Person person3 = new("Fleisch");
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(person1);
+            linkedList.AddFirst(person2);
+            linkedList.AddFirst(person3);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person3, person2, person1 }));
+        }
+        [Test]
         public void AddLast_AddObject_ReturnsObject()
         {
             Person person = new("Sebastian");

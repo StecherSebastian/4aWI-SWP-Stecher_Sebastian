@@ -6,16 +6,22 @@ namespace Datastructure
     {
         public Node<T>? Head;
         public Node<T> Last = null!;
+        public void AddFirst(T data)
+        {
+            Node<T> toAdd = new(data);
+            toAdd.Next = Head;
+            Head = toAdd;
+        }
         public void AddLast(T data)
         {
             if (Head == null)
             {
-                Head = new Node<T>(data);
+                Head = new(data);
                 Last = Head;
             }
             else
             {
-                Node<T> toAdd = new Node<T>(data);
+                Node<T> toAdd = new(data);
                 Last.Next = toAdd;
                 Last = toAdd;
             }
@@ -28,11 +34,7 @@ namespace Datastructure
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
             if (Head != null && Head.Data != null && Head.Data.Equals(elementAfter))
-            {
-                Node<T> nodeToInsert = new(elementToInsert);
-                nodeToInsert.Next = Head;
-                Head = nodeToInsert;
-            }
+                AddFirst(elementToInsert);
             else
             {
                 Node<T>? nodeBefore = GetNodeBefore(elementAfter);
