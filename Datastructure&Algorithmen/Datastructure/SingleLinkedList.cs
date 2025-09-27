@@ -89,5 +89,18 @@ namespace Datastructure
             }
             return false;
         }
+        public int? PosOfElement(T toFind)
+        {
+            int? count = 0;
+            Node<T>? current = Head;
+            while (current != null)
+            {
+                if (current.Data != null && current.Data.Equals(toFind))
+                    return count;
+                current = current.Next;
+                count++;
+            }
+            return null;
+        }
     }
 }
