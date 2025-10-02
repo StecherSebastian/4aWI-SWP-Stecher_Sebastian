@@ -5,126 +5,115 @@ namespace DatastructureTests
 {
     public class SimpleLinkedListUnitTests
     {
+        private Person _Person1;
+        private Person _Person2;
+        private Person _Person3;
+        [SetUp]
+        public void Setup()
+        {
+            _Person1 = new("Sebastian");
+            _Person2 = new("Lukas");
+            _Person3 = new("Stephan");
+        }
         [Test]
         public void AddFirst_AddObjects_ReturnsObjects()
         {
-            Person person1 = new("Sebastian");
-            Person person2 = new("Matthias");
-            Person person3 = new("Fleisch");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddFirst(person1);
-            linkedList.AddFirst(person2);
-            linkedList.AddFirst(person3);
-            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person3, person2, person1 }));
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.AddFirst(_Person3);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
         }
         [Test]
         public void AddLast_AddObject_ReturnsObject()
         {
-            Person person = new("Sebastian");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person);
-            Assert.That(linkedList.Head?.Data, Is.EqualTo(person));
+            linkedList.AddLast(_Person1);
+            Assert.That(linkedList.Head?.Data, Is.EqualTo(_Person1));
         }
         [Test]
         public void InsertAfter_ReturnsObject()
         {
-            Person person1 = new("Lukas");
-            Person person2 = new("Matthias");
-            Person person3 = new("Fleisch");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
-            int? pos = linkedList.PosOfElement(person2);
-            linkedList.InsertAfter(person1, person3);
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            int? pos = linkedList.PosOfElement(_Person2);
+            linkedList.InsertAfter(_Person1, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person1, person3, person2 }));
-                Assert.That(linkedList.PosOfElement(person2), !Is.EqualTo(pos));
+                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person3, _Person2 }));
+                Assert.That(linkedList.PosOfElement(_Person2), !Is.EqualTo(pos));
             });
         }
         [Test]
         public void InsertBefore_ReturnsObject()
         {
-            Person person1 = new("Lukas");
-            Person person2 = new("Matthias");
-            Person person3 = new("Fleisch");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
-            int? pos = linkedList.PosOfElement(person2);
-            linkedList.InsertBefore(person2, person3);
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            int? pos = linkedList.PosOfElement(_Person2);
+            linkedList.InsertBefore(_Person2, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person1, person3, person2 }));
-                Assert.That(linkedList.PosOfElement(person2), !Is.EqualTo(pos));
+                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person3, _Person2 }));
+                Assert.That(linkedList.PosOfElement(_Person2), !Is.EqualTo(pos));
             });
         }
         [Test]
         public void InsertBefore_BeforeHead_ReturnsObject()
         {
-            Person person1 = new("Lukas");
-            Person person2 = new("Matthias");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            int? pos = linkedList.PosOfElement(person1);
-            linkedList.InsertBefore(person1, person2);
+            linkedList.AddLast(_Person1);
+            int? pos = linkedList.PosOfElement(_Person1);
+            linkedList.InsertBefore(_Person1, _Person2);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person2, person1 }));
-                Assert.That(linkedList.PosOfElement(person1), !Is.EqualTo(pos));
+                Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person2, _Person1 }));
+                Assert.That(linkedList.PosOfElement(_Person1), !Is.EqualTo(pos));
             });
         }
         [Test]
         public void GetAllNodesData_AddObjects_ReturnsListObjects()
         {
-            Person person = new("Lukas");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person);
-            linkedList.AddLast(person);
-            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { person, person }));
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2 }));
         }
         [Test]
         public void GetNode_ReturnsNode()
         {
-            Person person1 = new("Lukas");
-            Person person2 = new("Matthias");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
-            Assert.That(linkedList.GetNode(person2), Is.EqualTo(new Node<Person>(person2)));
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            Assert.That(linkedList.GetNode(_Person2), Is.EqualTo(new Node<Person>(_Person2)));
         }
         [Test]
         public void GetNodeBefore_ReturnsNode()
         {
-            Person person1 = new("Lukas");
-            Person person2 = new("Matthias");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
-            Assert.That(linkedList.GetNodeBefore(person2), Is.EqualTo(new Node<Person>(person1)));
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            Assert.That(linkedList.GetNodeBefore(_Person2), Is.EqualTo(new Node<Person>(_Person1)));
         }
         [Test]
         public void Contains_ReturnsBool()
         {
-            Person person1 = new("Matthias");
-            Person person2 = new("Florian");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
-            Assert.That(linkedList.Contains(person2), Is.True);
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            Assert.That(linkedList.Contains(_Person2), Is.True);
         }
         [Test]
         public void PosOfElement_ReturnsInteger()
         {
-            Person person1 = new("Matthias");
-            Person person2 = new("Florian");
             SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(person1);
-            linkedList.AddLast(person2);
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.PosOfElement(person1), Is.EqualTo(0));
-                Assert.That(linkedList.PosOfElement(person2), Is.EqualTo(1));
+                Assert.That(linkedList.PosOfElement(_Person1), Is.EqualTo(0));
+                Assert.That(linkedList.PosOfElement(_Person2), Is.EqualTo(1));
             });
         }
     }
