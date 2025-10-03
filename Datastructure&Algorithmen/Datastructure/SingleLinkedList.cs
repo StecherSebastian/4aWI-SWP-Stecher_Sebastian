@@ -30,6 +30,7 @@ namespace Datastructure
         {
             Node<T>? nodeBefore = GetNode(elementBefore);
             if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+            else AddLast(elementToInsert);
         }
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
@@ -39,6 +40,7 @@ namespace Datastructure
             {
                 Node<T>? nodeBefore = GetNodeBefore(elementAfter);
                 if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+                else AddFirst(elementToInsert);
             }
         }
         private void InsertNode(Node<T> nodeBefore, T elementToInsert)
