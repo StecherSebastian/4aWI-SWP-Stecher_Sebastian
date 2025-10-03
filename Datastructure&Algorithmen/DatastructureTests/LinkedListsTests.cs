@@ -16,7 +16,7 @@ namespace DatastructureTests
             _Person3 = new("Stephan");
         }
         [Test]
-        public void AddFirst_AddObjects_ReturnsObjects()
+        public void AddFirst_AddMultipleObjects_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddFirst(_Person1);
@@ -25,14 +25,16 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
         }
         [Test]
-        public void AddLast_AddObject_ReturnsObject()
+        public void AddLast_AddMultipleObjects_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
-            Assert.That(linkedList.Head?.Data, Is.EqualTo(_Person1));
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3}));
         }
         [Test]
-        public void InsertAfter_ReturnsObject()
+        public void InsertAfter_InsertBetween_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -46,7 +48,7 @@ namespace DatastructureTests
             });
         }
         [Test]
-        public void InsertBefore_ReturnsObject()
+        public void InsertBefore_InsertBetween_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -60,7 +62,7 @@ namespace DatastructureTests
             });
         }
         [Test]
-        public void InsertBefore_BeforeHead_ReturnsObject()
+        public void InsertBefore_InsertBeforeHead_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -73,7 +75,7 @@ namespace DatastructureTests
             });
         }
         [Test]
-        public void GetAllNodesData_AddObjects_ReturnsListObjects()
+        public void GetAllNodesData_AddMultipleObjects_ReturnsListObjects()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -81,7 +83,7 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2 }));
         }
         [Test]
-        public void GetNode_ReturnsNode()
+        public void GetNode_ObjectExists_ReturnsNode()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -89,7 +91,7 @@ namespace DatastructureTests
             Assert.That(linkedList.GetNode(_Person2), Is.EqualTo(new Node<Person>(_Person2)));
         }
         [Test]
-        public void GetNodeBefore_ReturnsNode()
+        public void GetNodeBefore_ObjectExists_ReturnsNode()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -97,7 +99,7 @@ namespace DatastructureTests
             Assert.That(linkedList.GetNodeBefore(_Person2), Is.EqualTo(new Node<Person>(_Person1)));
         }
         [Test]
-        public void Contains_ReturnsBool()
+        public void Contains_ObjectExists_ReturnsTrue()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
@@ -105,7 +107,7 @@ namespace DatastructureTests
             Assert.That(linkedList.Contains(_Person2), Is.True);
         }
         [Test]
-        public void PosOfElement_ReturnsInteger()
+        public void PosOfElement_AddMultipleObjects_ReturnsCorrectPosition()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
