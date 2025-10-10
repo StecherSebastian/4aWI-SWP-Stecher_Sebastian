@@ -5,7 +5,7 @@ namespace Datastructure
     public class SingleLinkedList<T>
     {
         private Node<T>? _Head;
-        private Node<T> _Last = null!;
+        private Node<T> Last = null!;
         public void AddFirst(T data)
         {
             Node<T> toAdd = new(data);
@@ -17,20 +17,26 @@ namespace Datastructure
             if (_Head == null)
             {
                 _Head = new(data);
-                _Last = _Head;
+                Last = _Head;
             }
             else
             {
                 Node<T> toAdd = new(data);
-                _Last.Next = toAdd;
-                _Last = toAdd;
+                Last.Next = toAdd;
+                Last = toAdd;
             }
         }
         public void InsertAfter(T elementBefore, T elementToInsert)
         {
             Node<T>? nodeBefore = GetNode(elementBefore);
-            if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+            if (nodeBefore != null) InsertAfter(nodeBefore, elementToInsert);
             else AddLast(elementToInsert);
+        }
+        private void InsertAfter(Node<T> nodeBefore, T elementToInsert)
+        {
+            Node<T> nodeToInsert = new(elementToInsert);
+            nodeToInsert.Next = nodeBefore.Next;
+            nodeBefore.Next = nodeToInsert;
         }
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
@@ -39,15 +45,9 @@ namespace Datastructure
             else
             {
                 Node<T>? nodeBefore = GetNodeBefore(elementAfter);
-                if (nodeBefore != null) InsertNode(nodeBefore, elementToInsert);
+                if (nodeBefore != null) InsertAfter(nodeBefore, elementToInsert);
                 else AddFirst(elementToInsert);
             }
-        }
-        private void InsertNode(Node<T> nodeBefore, T elementToInsert)
-        {
-            Node<T> nodeToInsert = new(elementToInsert);
-            nodeToInsert.Next = nodeBefore.Next;
-            nodeBefore.Next = nodeToInsert;
         }
         public List<T> GetAllNodesData()
         {
