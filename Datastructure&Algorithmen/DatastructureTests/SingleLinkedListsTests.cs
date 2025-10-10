@@ -3,7 +3,7 @@ using Datastructure;
 
 namespace DatastructureTests
 {
-    public class SimpleLinkedListUnitTests
+    public class SingleLinkedListUnitTests
     {
         private Person _Person1;
         private Person _Person2;
