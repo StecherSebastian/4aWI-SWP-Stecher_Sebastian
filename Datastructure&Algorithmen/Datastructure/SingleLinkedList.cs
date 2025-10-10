@@ -4,26 +4,26 @@ namespace Datastructure
 {
     public class SingleLinkedList<T>
     {
-        public Node<T>? Head;
-        public Node<T> Last = null!;
+        private Node<T>? _Head;
+        private Node<T> _Last = null!;
         public void AddFirst(T data)
         {
             Node<T> toAdd = new(data);
-            toAdd.Next = Head;
-            Head = toAdd;
+            toAdd.Next = _Head;
+            _Head = toAdd;
         }
         public void AddLast(T data)
         {
-            if (Head == null)
+            if (_Head == null)
             {
-                Head = new(data);
-                Last = Head;
+                _Head = new(data);
+                _Last = _Head;
             }
             else
             {
                 Node<T> toAdd = new(data);
-                Last.Next = toAdd;
-                Last = toAdd;
+                _Last.Next = toAdd;
+                _Last = toAdd;
             }
         }
         public void InsertAfter(T elementBefore, T elementToInsert)
@@ -34,7 +34,7 @@ namespace Datastructure
         }
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
-            if (Head != null && Head.Data != null && Head.Data.Equals(elementAfter))
+            if (_Head != null && _Head.Data != null && _Head.Data.Equals(elementAfter))
                 AddFirst(elementToInsert);
             else
             {
@@ -52,7 +52,7 @@ namespace Datastructure
         public List<T> GetAllNodesData()
         {
             List<T> result = new();
-            Node<T>? current = Head;
+            Node<T>? current = _Head;
             while (current != null)
             {
                 result.Add(current.Data);
@@ -62,7 +62,7 @@ namespace Datastructure
         }
         public Node<T>? GetNode(T toFind)
         {
-            Node<T>? current = Head;
+            Node<T>? current = _Head;
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(toFind))
@@ -73,7 +73,7 @@ namespace Datastructure
         }
         public Node<T>? GetNodeBefore(T toFind)
         {
-            Node<T>? current = Head;
+            Node<T>? current = _Head;
             while (current != null)
             {
                 if (current.Next != null && current.Next.Data != null && current.Next.Data.Equals(toFind))
@@ -84,7 +84,7 @@ namespace Datastructure
         }
         public bool Contains(T toFind)
         {
-            Node<T>? current = Head;
+            Node<T>? current = _Head;
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(toFind))
@@ -96,7 +96,7 @@ namespace Datastructure
         public int? PosOfElement(T toFind)
         {
             int? count = 0;
-            Node<T>? current = Head;
+            Node<T>? current = _Head;
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(toFind))
