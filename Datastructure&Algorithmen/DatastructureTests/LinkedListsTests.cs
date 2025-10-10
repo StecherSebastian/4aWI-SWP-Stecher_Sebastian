@@ -8,12 +8,14 @@ namespace DatastructureTests
         private Person _Person1;
         private Person _Person2;
         private Person _Person3;
+        private Person? _PersonNull;
         [SetUp]
         public void Setup()
         {
             _Person1 = new("Sebastian");
             _Person2 = new("Lukas");
             _Person3 = new("Stephan");
+            _PersonNull = null;
         }
         [Test]
         public void AddFirst_AddMultipleObjects_ObjectsInCorrectOrder()
@@ -25,6 +27,14 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
         }
         [Test]
+        public void AddFirt_AddNull_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
+        }
+        [Test]
         public void AddLast_AddMultipleObjects_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
@@ -32,6 +42,14 @@ namespace DatastructureTests
             linkedList.AddLast(_Person2);
             linkedList.AddLast(_Person3);
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3}));
+        }
+        [Test]
+        public void AddLast_AddNull_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
         }
         [Test]
         public void InsertAfter_InsertBetween_ObjectsInCorrectOrder()
@@ -54,6 +72,14 @@ namespace DatastructureTests
             linkedList.AddLast(_Person1);
             linkedList.InsertAfter(_Person3, _Person2);
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2 }));
+        }
+        [Test]
+        public void InsertAfter_InsertNull_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.InsertAfter(_Person1, _PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _PersonNull }));
         }
         [Test]
         public void InsertBefore_InsertBetween_ObjectsInCorrectOrder()
@@ -89,6 +115,14 @@ namespace DatastructureTests
             linkedList.AddLast(_Person1);
             linkedList.InsertBefore(_Person3, _Person2);
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person2, _Person1 }));
+        }
+        [Test]
+        public void InsertBefore_InsertNull_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.InsertBefore(_Person1, _PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _PersonNull, _Person1 }));
         }
         [Test]
         public void GetAllNodesData_AddMultipleObjects_ReturnsListObjects()
