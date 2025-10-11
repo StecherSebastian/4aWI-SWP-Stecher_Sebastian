@@ -6,6 +6,11 @@ namespace Datastructure
     {
         private Node<T>? _Head;
         private Node<T> _Last = null!;
+        private enum Direction
+        {
+            fromFirst,
+            fromLast
+        }
         public void AddFirst(T data)
         {
             Node<T> toAdd = new(data);
@@ -31,16 +36,55 @@ namespace Datastructure
                 _Last = toAdd;
             }
         }
-        public List<T> GetAllNodesData()
+        public void InsertAfter(T elementBefore, T elementToInsert)
         {
+            Node<T>? nodeBefore = GetNode(elementBefore);
+            if (nodeBefore != null) InsertAfter(nodeBefore, elementToInsert);
+            else AddLast(elementToInsert);
+        }
+        private void InsertAfter(Node<T> nodeBefore, T elementToInsert)
+        {
+            Node<T> nodeToInsert = new(elementToInsert);
+            nodeToInsert.Next = nodeBefore.Next;
+            if (nodeBefore.Next != null)
+                nodeBefore.Next.Previous = nodeToInsert;
+            nodeBefore.Next = nodeToInsert;
+            nodeToInsert.Previous = nodeBefore;
+        }
+        public void InsertBefore(T elementAfter, T elementToInsert)
+        {
+            if (_Head != null && _Head.Data != null && _Head.Data.Equals(elementAfter))
+                AddFirst(elementToInsert);
+            else
+            {
+                Node<T>? nodeAfter = GetNode(elementAfter);
+                if (nodeAfter != null && nodeAfter.Previous != null)
+                    InsertAfter(nodeAfter.Previous, elementToInsert);
+                else AddFirst(elementToInsert);
+            }
+        }
+        public List<T> GetAllNodesData(int direction)
+        {
+            Direction d = (Direction)direction;
             List<T> values = new();
-            Node<T>? current = _Head;
+            Node<T>? current = d == Direction.fromFirst ? _Head : _Last;
             while (current != null)
             {
                 values.Add(current.Data);
-                current = current.Next;
+                current = d == Direction.fromFirst ? current.Next : current.Previous;
             }
             return values;
+        }
+        public Node<T>? GetNode(T element)
+        {
+            Node<T>? current = _Head;
+            while (current != null)
+            {
+                if (current.Data != null && current.Data.Equals(element))
+                    return current;
+                current = current.Next;
+            }
+            return null;
         }
     }
 }
