@@ -25,8 +25,10 @@ namespace DatastructureTests
             linkedList.AddFirst(_Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3 }));
             });
         }
         [Test]
@@ -37,8 +39,10 @@ namespace DatastructureTests
             linkedList.AddFirst(_PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                    Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast), 
+                    Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
             });
         }
         [Test]
@@ -50,8 +54,10 @@ namespace DatastructureTests
             linkedList.AddLast(_Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _Person2, _Person3 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person3, _Person2, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                    Is.EqualTo(new List<Person?> { _Person1, _Person2, _Person3 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast), 
+                    Is.EqualTo(new List<Person?> { _Person3, _Person2, _Person1 }));
             });
         }
         [Test]
@@ -62,8 +68,10 @@ namespace DatastructureTests
             linkedList.AddLast(_PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                    Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
+                Assert.That(linkedList.GetAllNodesData((DoubleLinkedList<Person>.Direction)1), 
+                    Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
             });
         }
         [Test]
@@ -75,8 +83,10 @@ namespace DatastructureTests
             linkedList.AddFirst(_Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person3, _Person1, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _Person1, _Person3 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person3, _Person1, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person1, _Person3 }));
             });
         }
         [Test]
@@ -88,8 +98,10 @@ namespace DatastructureTests
             linkedList.InsertAfter(_Person1, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _Person3, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _Person3, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person1, _Person3, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person3, _Person1 }));
             });
         }
         [Test]
@@ -100,8 +112,10 @@ namespace DatastructureTests
             linkedList.InsertAfter(_Person1, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person2, _Person3 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person3, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person3 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person3, _Person2 }));
             });
         }
         [Test]
@@ -113,8 +127,10 @@ namespace DatastructureTests
             linkedList.InsertAfter(_Person1, _PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _PersonNull, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _PersonNull, _Person1 }));
             });
         }
         [Test]
@@ -126,8 +142,10 @@ namespace DatastructureTests
             linkedList.InsertBefore(_Person2, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _Person3, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _Person3, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person1, _Person3, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person3, _Person1 }));
             });
         }
         [Test]
@@ -138,8 +156,10 @@ namespace DatastructureTests
             linkedList.InsertBefore(_Person1, _Person2);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person2, _Person1 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person1, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person1, _Person2 }));
             });
         }
         [Test]
@@ -150,8 +170,10 @@ namespace DatastructureTests
             linkedList.InsertBefore(_Person1, _Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person3, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _Person3 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person3, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _Person3 }));
             });
         }
         [Test]
@@ -163,8 +185,10 @@ namespace DatastructureTests
             linkedList.InsertBefore(_Person2, _PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person2 }));
-                Assert.That(linkedList.GetAllNodesData(1), Is.EqualTo(new List<Person?> { _Person2, _PersonNull, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person2 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person?> { _Person2, _PersonNull, _Person1 }));
             });
         }
     }

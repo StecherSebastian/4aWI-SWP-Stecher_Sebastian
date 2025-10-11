@@ -6,7 +6,7 @@ namespace Datastructure
     {
         private Node<T>? _Head;
         private Node<T> _Last = null!;
-        private enum Direction
+        public enum Direction
         {
             fromFirst,
             fromLast
@@ -63,9 +63,8 @@ namespace Datastructure
                 else AddFirst(elementToInsert);
             }
         }
-        public List<T> GetAllNodesData(int direction)
+        public List<T> GetAllNodesData(Direction d)
         {
-            Direction d = (Direction)direction;
             List<T> values = new();
             Node<T>? current = d == Direction.fromFirst ? _Head : _Last;
             while (current != null)
