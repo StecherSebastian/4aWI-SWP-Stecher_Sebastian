@@ -5,25 +5,27 @@ namespace Datastructure
     public class SingleLinkedList<T>
     {
         private Node<T>? _Head;
-        private Node<T> Last = null!;
+        private Node<T> _Last = null!;
         public void AddFirst(T data)
         {
             Node<T> toAdd = new(data);
             toAdd.Next = _Head;
             _Head = toAdd;
+            if (_Last == null)
+                _Last = _Head;
         }
         public void AddLast(T data)
         {
             if (_Head == null)
             {
                 _Head = new(data);
-                Last = _Head;
+                _Last = _Head;
             }
             else
             {
                 Node<T> toAdd = new(data);
-                Last.Next = toAdd;
-                Last = toAdd;
+                _Last.Next = toAdd;
+                _Last = toAdd;
             }
         }
         public void InsertAfter(T elementBefore, T elementToInsert)

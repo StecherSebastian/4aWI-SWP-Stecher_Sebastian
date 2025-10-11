@@ -3,7 +3,7 @@ using Datastructure;
 
 namespace DatastructureTests
 {
-    public class SingleLinkedListUnitTests
+    public class SingleLinkedListTests
     {
         private Person _Person1;
         private Person _Person2;
@@ -50,6 +50,15 @@ namespace DatastructureTests
             linkedList.AddLast(_Person1);
             linkedList.AddLast(_PersonNull);
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
+        }
+        [Test]
+        public void AddLast_ListEmptyAddFirst_LastCorrectlyInitialized()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddFirst(_Person3);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person3, _Person1, _Person2}));
         }
         [Test]
         public void InsertAfter_InsertBetween_ObjectsInCorrectOrder()
