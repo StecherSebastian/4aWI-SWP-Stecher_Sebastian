@@ -85,5 +85,36 @@ namespace Datastructure
             }
             return null;
         }
+        public int? PosOfElement(T element, Direction d)
+        {
+            int pos;
+            Node<T>? current;
+            if (d == Direction.fromFirst)
+            {
+                pos = 0;
+                current = _Head;
+            }
+            else
+            {
+                pos = -1;
+                current = _Last;
+            }
+            while (current != null)
+            {
+                if (current.Data != null && current.Data.Equals(element))
+                    return pos;
+                if (d == Direction.fromFirst)
+                {
+                    current = current.Next;
+                    pos++;
+                }
+                else
+                {
+                    current = current.Previous;
+                    pos--;
+                }
+            }
+            return null;
+        }
     }
 }

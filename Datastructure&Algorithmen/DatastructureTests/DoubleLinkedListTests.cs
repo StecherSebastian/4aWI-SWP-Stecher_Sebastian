@@ -39,9 +39,9 @@ namespace DatastructureTests
             linkedList.AddFirst(_PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
                     Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
-                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast), 
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
                     Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
             });
         }
@@ -54,9 +54,9 @@ namespace DatastructureTests
             linkedList.AddLast(_Person3);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
                     Is.EqualTo(new List<Person?> { _Person1, _Person2, _Person3 }));
-                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast), 
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
                     Is.EqualTo(new List<Person?> { _Person3, _Person2, _Person1 }));
             });
         }
@@ -68,9 +68,9 @@ namespace DatastructureTests
             linkedList.AddLast(_PersonNull);
             Assert.Multiple(() =>
             {
-                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
                     Is.EqualTo(new List<Person?> { _Person1, _PersonNull }));
-                Assert.That(linkedList.GetAllNodesData((DoubleLinkedList<Person>.Direction)1), 
+                Assert.That(linkedList.GetAllNodesData((DoubleLinkedList<Person>.Direction)1),
                     Is.EqualTo(new List<Person?> { _PersonNull, _Person1 }));
             });
         }
@@ -189,6 +189,29 @@ namespace DatastructureTests
                     Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person2 }));
                 Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
                     Is.EqualTo(new List<Person?> { _Person2, _PersonNull, _Person1 }));
+            });
+        }
+        [Test]
+        public void PosOfElement_AddingMultipleObjects_ObjectsWithCorrectIndex()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.PosOfElement(_Person1, DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(0));
+                Assert.That(linkedList.PosOfElement(_Person2, DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(1));
+                Assert.That(linkedList.PosOfElement(_Person3, DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(2));
+                Assert.That(linkedList.PosOfElement(_Person1, DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(-3));
+                Assert.That(linkedList.PosOfElement(_Person2, DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(-2));
+                Assert.That(linkedList.PosOfElement(_Person3, DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(-1));
             });
         }
     }
