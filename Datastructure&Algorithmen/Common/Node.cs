@@ -3,6 +3,7 @@
     public class Node<T>(T t)
     {
         public Node<T>? Next;
+        public Node<T>? Previous;
         public T Data = t;
         public override bool Equals(object? obj)
         {
