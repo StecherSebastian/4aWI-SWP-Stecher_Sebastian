@@ -1,9 +1,6 @@
-﻿using Common;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Datastructure
+﻿namespace Common
 {
-    public class Person
+    public class Person : IComparable<Person>
     {
         public int ID { get; set; }
         public string? FirstName { get; private set; }
@@ -85,6 +82,18 @@ namespace Datastructure
         public override int GetHashCode()
         {
             return HashCode.Combine(ID, FirstName, LastName, BirthDate, Age, Gender);
+        }
+        public int CompareTo(Person? other)
+        {
+            int result;
+            if (other is null) return 1;
+            result = string.Compare(LastName, other.LastName, StringComparison.OrdinalIgnoreCase);
+            if (result != 0) return result;
+            result = string.Compare(FirstName, other.FirstName, StringComparison.OrdinalIgnoreCase);
+            if (result != 0) return result;
+            result = Nullable.Compare(BirthDate, other.BirthDate);
+            if (result != 0) return result;
+            return ID.CompareTo(other.ID);
         }
     }
 }
