@@ -108,5 +108,28 @@ namespace Datastructure
             }
             return null;
         }
+        public void BubbleSort()
+        {
+            Node<T>? current;
+            T? temp;
+            bool swapped;
+            do
+            {
+                swapped = false;
+                current = _Head;
+                while (current != null)
+                {
+                    if (current.Next != null && current.CompareTo(current.Next) > 0)
+                    {
+                        temp = current.Data;
+                        current.Data = current.Next.Data;
+                        current.Next.Data = temp;
+                        swapped = true;
+                    }
+                    current = current.Next;
+                }
+            }
+            while (swapped);
+        }
     }
 }
