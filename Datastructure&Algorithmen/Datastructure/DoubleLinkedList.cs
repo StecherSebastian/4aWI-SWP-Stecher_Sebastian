@@ -89,6 +89,22 @@ namespace Datastructure
                 }
             }
         }
+        public void Remove(T element)
+        {
+            Node<T>? nodeToRemove = GetNode(element);
+            if (nodeToRemove != null)
+            {
+                if (nodeToRemove.Equals(_Head))
+                    RemoveFirst();
+                else if (nodeToRemove.Equals(_Last))
+                    RemoveLast();
+                else if (nodeToRemove.Previous != null && nodeToRemove.Next != null )
+                {
+                    nodeToRemove.Next.Previous = nodeToRemove.Previous;
+                    nodeToRemove.Previous.Next = nodeToRemove.Next;
+                }
+            }
+        }
         public List<T> GetAllNodesData(Direction d)
         {
             List<T> values = new();
