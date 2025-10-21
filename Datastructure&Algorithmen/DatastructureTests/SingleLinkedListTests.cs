@@ -156,6 +156,34 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3 }));
         }
         [Test]
+        public void Remove_Head_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person2 }));
+        }
+        [Test]
+        public void Remove_Last_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.Remove(_Person2);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1 }));
+        }
+        [Test]
+        public void Remove_ObjectInbetween_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            linkedList.AddLast(_Person3);
+            linkedList.Remove(_PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person3 }));
+        }
+        [Test]
         public void GetAllNodesData_AddMultipleObjects_ReturnsListObjects()
         {
             SingleLinkedList<Person> linkedList = new();
