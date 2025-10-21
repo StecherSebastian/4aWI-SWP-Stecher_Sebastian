@@ -193,6 +193,23 @@ namespace DatastructureTests
             });
         }
         [Test]
+        public void RemoveFirst_RemovesHead_ObjectsInCorrectOrder()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.AddFirst(_Person3);
+            linkedList.AddFirst(_PersonNull);
+            linkedList.RemoveFirst();
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst), 
+                    Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast), 
+                    Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3 }));
+            });
+        }
+        [Test]
         public void GetNode_ObjectExists_ReturnsNode()
         {
             SingleLinkedList<Person> linkedList = new();

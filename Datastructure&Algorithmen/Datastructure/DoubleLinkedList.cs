@@ -5,7 +5,7 @@ namespace Datastructure
     public class DoubleLinkedList<T>
     {
         private Node<T>? _Head;
-        private Node<T> _Last = null!;
+        private Node<T>? _Last;
         public enum Direction
         {
             fromFirst,
@@ -29,7 +29,7 @@ namespace Datastructure
                 _Head = toAdd;
                 _Last = _Head;
             }
-            else
+            else if (_Last != null)
             {
                 _Last.Next = toAdd;
                 toAdd.Previous = _Last;
@@ -61,6 +61,16 @@ namespace Datastructure
                 if (nodeAfter != null && nodeAfter.Previous != null)
                     InsertAfter(nodeAfter.Previous, elementToInsert);
                 else AddFirst(elementToInsert);
+            }
+        }
+        public void RemoveFirst()
+        {
+            if (_Head != null)
+            {
+                _Head = _Head.Next;
+                _Head.Previous = null;
+                if (_Head == null)
+                    _Last = null;
             }
         }
         public List<T> GetAllNodesData(Direction d)
