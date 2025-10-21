@@ -73,6 +73,22 @@ namespace Datastructure
                     _Last = null;
             }
         }
+        public void RemoveLast()
+        {
+            if (_Last != null)
+            {
+                if (_Head == _Last)
+                {
+                    _Head = null;
+                    _Last = null;
+                }
+                else if (_Last.Previous != null)
+                {
+                    _Last.Previous.Next = null;
+                    _Last = _Last.Previous;
+                }
+            }
+        }
         public List<T> GetAllNodesData(Direction d)
         {
             List<T> values = new();
