@@ -81,6 +81,8 @@ namespace Datastructure
             {
                 if (current.Data != null && current.Data.Equals(element))
                     return current;
+                else if (current.Data == null && element == null)
+                    return current;
                 current = current.Next;
             }
             return null;
@@ -102,6 +104,8 @@ namespace Datastructure
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(element))
+                    return pos;
+                else if (current.Data == null && element == null)
                     return pos;
                 if (d == Direction.fromFirst)
                 {
