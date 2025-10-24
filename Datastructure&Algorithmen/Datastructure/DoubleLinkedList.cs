@@ -68,7 +68,8 @@ namespace Datastructure
             if (_Head != null)
             {
                 _Head = _Head.Next;
-                _Head.Previous = null;
+                if (_Head != null)
+                    _Head.Previous = null;
                 if (_Head == null)
                     _Last = null;
             }
