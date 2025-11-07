@@ -223,7 +223,7 @@ namespace DatastructureTests
             linkedList.AddLast(_Person2);
             linkedList.AddLast(_Person3);
             linkedList.AddLast(_PersonNull);
-            linkedList.BubbleSort();
+            linkedList.Sort();
             Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person> { _PersonNull, _Person3, _Person2, _Person1 }));
         }
     }

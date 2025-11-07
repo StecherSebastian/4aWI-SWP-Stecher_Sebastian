@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Algorithmen;
+using Common;
 
 namespace Datastructure
 {
@@ -10,6 +11,11 @@ namespace Datastructure
         {
             fromFirst,
             fromLast
+        }
+        private ISortStrategy<T> _SortStrategy;
+        public DoubleLinkedList(ISortStrategy<T>? sortStrategy = null)
+        {
+            _SortStrategy = sortStrategy ?? new BubbleSortStrategy<T>();
         }
         public void AddFirst(T data)
         {
@@ -62,12 +68,6 @@ namespace Datastructure
                     InsertAfter(nodeAfter.Previous, elementToInsert);
                 else AddFirst(elementToInsert);
             }
-        }
-        private void SwapNodes(Node<T> nodeA,  Node<T> nodeB)
-        {
-            T temp = nodeA.Data;
-            nodeA.Data = nodeB.Data;
-            nodeB.Data = temp;
         }
         public List<T> GetAllNodesData(Direction d)
         {
@@ -122,25 +122,10 @@ namespace Datastructure
             }
             return null;
         }
-        public void BubbleSort()
+        public void Sort()
         {
-            bool swapped;
-            Node<T>? current;
-            do
-            {
-                swapped = false;
-                current = _Head;
-                while (current != null)
-                {
-                    if (current.Next != null && current.CompareTo(current.Next) > 0)
-                    {
-                        SwapNodes(current, current.Next);
-                        swapped = true;
-                    }
-                    current = current.Next;
-                }
-            }
-            while (swapped);
+            if (_Head != null)
+                _SortStrategy.Sort(_Head);
         }
     }
 }
