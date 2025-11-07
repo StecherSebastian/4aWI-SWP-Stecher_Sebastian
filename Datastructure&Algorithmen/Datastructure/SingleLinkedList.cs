@@ -51,6 +51,12 @@ namespace Datastructure
                 else AddFirst(elementToInsert);
             }
         }
+        private void SwapNodes(Node<T> nodeA, Node<T> nodeB)
+        {
+            T temp = nodeA.Data;
+            nodeA.Data = nodeB.Data;
+            nodeB.Data = temp;
+        }
         public List<T> GetAllNodesData()
         {
             List<T> result = new();
@@ -121,9 +127,7 @@ namespace Datastructure
                 {
                     if (current.Next != null && current.CompareTo(current.Next) > 0)
                     {
-                        temp = current.Data;
-                        current.Data = current.Next.Data;
-                        current.Next.Data = temp;
+                        SwapNodes(current, current.Next);
                         swapped = true;
                     }
                     current = current.Next;
