@@ -117,7 +117,6 @@ namespace Datastructure
         public void BubbleSort()
         {
             Node<T>? current;
-            T? temp;
             bool swapped;
             do
             {
