@@ -177,5 +177,16 @@ namespace DatastructureTests
                 Assert.That(linkedList.PosOfElement(_Person2), Is.EqualTo(1));
             });
         }
+        [Test]
+        public void BubbleSort_AddMultipleObjects_ObjectsSorted()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.AddLast(_PersonNull);
+            linkedList.BubbleSort();
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _PersonNull, _Person2, _Person1, _Person3 } ));
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Datastructure;
+﻿using Common;
+using Datastructure;
 
 namespace DatastructureTests
 {
@@ -13,7 +14,7 @@ namespace DatastructureTests
         {
             _Person1 = new("Sebastian");
             _Person2 = new("Lukas");
-            _Person3 = new("Stephan");
+            _Person3 = new("Arnold");
             _PersonNull = null;
         }
         [Test]
@@ -213,6 +214,17 @@ namespace DatastructureTests
                 Assert.That(linkedList.PosOfElement(_Person3, DoubleLinkedList<Person>.Direction.fromLast),
                     Is.EqualTo(-1));
             });
+        }
+        [Test]
+        public void BubbleSort_AddingMultipleObjects_ObjectsSorted()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.AddLast(_PersonNull);
+            linkedList.BubbleSort();
+            Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person> { _PersonNull, _Person3, _Person2, _Person1 }));
         }
     }
 }
