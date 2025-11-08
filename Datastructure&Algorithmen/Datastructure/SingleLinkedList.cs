@@ -3,10 +3,11 @@ using Algorithmen;
 
 namespace Datastructure
 {
-    public class SingleLinkedList<T>
+    public class SingleLinkedList<T> : ISortableDatastructure<T> where T : IComparable<T>
     {
         private Node<T>? _Head;
         private Node<T> _Last = null!;
+        private int _Count;
         private ISortStrategy<T> _SortStrategy;
         public SingleLinkedList(ISortStrategy<T>? sortStrategy = null)
         {
@@ -19,6 +20,7 @@ namespace Datastructure
             _Head = toAdd;
             if (_Last == null)
                 _Last = _Head;
+            _Count++;
         }
         public void AddLast(T data)
         {
@@ -33,6 +35,7 @@ namespace Datastructure
                 _Last.Next = toAdd;
                 _Last = toAdd;
             }
+            _Count++;
         }
         public void InsertAfter(T elementBefore, T elementToInsert)
         {
@@ -45,6 +48,7 @@ namespace Datastructure
             Node<T> nodeToInsert = new(elementToInsert);
             nodeToInsert.Next = nodeBefore.Next;
             nodeBefore.Next = nodeToInsert;
+            _Count++;
         }
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
@@ -56,6 +60,10 @@ namespace Datastructure
                 if (nodeBefore != null) InsertAfter(nodeBefore, elementToInsert);
                 else AddFirst(elementToInsert);
             }
+        }
+        public int Count()
+        {
+            return _Count;
         }
         public List<T> GetAllNodesData()
         {
@@ -79,6 +87,21 @@ namespace Datastructure
             }
             return null;
         }
+        public Node<T> GetNode(int pos)
+        {
+            if (pos > _Count || pos < 0)
+                throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
+            Node<T>? current = _Head;
+            for (int i = 0;  i < pos; i++)
+            {
+                if (current == null)
+                    throw new InvalidOperationException("List structure is corrupted.");
+                current = current.Next;
+            }
+            if (current == null)
+                throw new InvalidOperationException("List structure is corrupted.");
+            return current;
+        }
         public Node<T>? GetNodeBefore(T toFind)
         {
             Node<T>? current = _Head;
@@ -89,6 +112,20 @@ namespace Datastructure
                 current = current.Next;
             }
             return null;
+        }
+        public T Get(int pos)
+        {
+            if (pos > _Count || pos < 0)
+                throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
+            Node<T>? current = _Head;
+            for (int i = 0; i < pos; i++) {
+                if (current == null)
+                    throw new InvalidOperationException("List structure is corrupted.");
+                current = current.Next;
+            }
+            if (current == null)
+                throw new InvalidOperationException("List structure is corrupted.");
+            return current.Data;
         }
         public bool Contains(T toFind)
         {
@@ -114,6 +151,14 @@ namespace Datastructure
             }
             return null;
         }
+        public void Swap(int indexA, int indexB)
+        {
+            Node<T> nodeA = GetNode(indexA);
+            Node<T> nodeB = GetNode(indexB);
+            T temp = nodeA.Data;
+            nodeA.Data = nodeB.Data;
+            nodeB.Data = temp;
+        }
         public void ChangeSortStrategy(ISortStrategy<T> sortStrategy)
         {
             _SortStrategy = sortStrategy;
@@ -121,7 +166,7 @@ namespace Datastructure
         public void Sort()
         {
             if (_Head != null)
-                _SortStrategy.Sort(_Head);
+                _SortStrategy.Sort(this);
         }
     }
 }

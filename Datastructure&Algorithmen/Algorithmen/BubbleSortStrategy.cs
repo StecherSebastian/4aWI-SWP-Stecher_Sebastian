@@ -14,7 +14,17 @@ namespace Algorithmen
                 swapped = false;
                 for (int i = 0; i < n - 1; i ++)
                 {
-                    if (d.Get(i).CompareTo(d.Get(i + 1)) > 0)
+                    T a = d.Get(i);
+                    T b = d.Get(i + 1);
+                    if (a == null && b != null)
+                        continue;
+                    else if (a != null && b == null)
+                    {
+                        d.Swap(i, i + 1);
+                        swapped = true;
+                        continue;
+                    }
+                    else if (a != null && b != null && a.CompareTo(b) > 0)
                     {
                         d.Swap(i, i + 1);
                         swapped = true;
