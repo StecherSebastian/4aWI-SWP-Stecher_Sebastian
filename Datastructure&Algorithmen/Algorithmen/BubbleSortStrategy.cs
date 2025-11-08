@@ -2,32 +2,23 @@
 
 namespace Algorithmen
 {
-    public class BubbleSortStrategy<T> : ISortStrategy<T>
+    public class BubbleSortStrategy<T> : ISortStrategy<T> where T : IComparable<T>
     {
-        private void SwapNodes(Node<T> nodeA, Node<T> nodeB)
+        public void Sort(ISortableDatastructure<T> d)
         {
-            if (nodeA == null || nodeB == null) return;
-            T temp = nodeA.Data;
-            nodeA.Data = nodeB.Data;
-            nodeB.Data = temp;
-        }
-        public void Sort(Node<T>? head)
-        {
-            if (head == null) return;
+            int n = d.Count();
+            if (n < 0) return;
             bool swapped;
-            Node<T>? current;
             do
             {
                 swapped = false;
-                current = head;
-                while (current != null)
+                for (int i = 0; i < n - 1; i ++)
                 {
-                    if (current.Next != null && current.CompareTo(current.Next) > 0)
+                    if (d.Get(i).CompareTo(d.Get(i + 1)) > 0)
                     {
-                        SwapNodes(current, current.Next);
+                        d.Swap(i, i + 1);
                         swapped = true;
                     }
-                    current = current.Next;
                 }
             }
             while (swapped);
