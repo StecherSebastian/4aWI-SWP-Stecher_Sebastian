@@ -7,7 +7,7 @@ namespace Algorithmen
         public void Sort(ISortableDatastructure<T> d)
         {
             int n = d.Count();
-            if (n < 0) return;
+            if (n <= 0) return;
             bool swapped;
             do
             {
