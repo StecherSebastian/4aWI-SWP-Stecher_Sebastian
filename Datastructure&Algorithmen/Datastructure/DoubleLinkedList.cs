@@ -82,9 +82,9 @@ namespace Datastructure
         {
             return _Count;
         }
-        public List<T> GetAllNodesData(Direction d)
+        public List<T?> GetAllNodesData(Direction d)
         {
-            List<T> values = new();
+            List<T?> values = new();
             Node<T>? current = d == Direction.fromFirst ? _Head : _Last;
             while (current != null)
             {
@@ -119,7 +119,7 @@ namespace Datastructure
                 throw new InvalidOperationException("List structure is corrupted.");
             return current;
         }
-        public T Get(int pos)
+        public T? Get(int pos)
         {
             if (pos > _Count || pos < _Count * -1)
                 throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
@@ -174,7 +174,7 @@ namespace Datastructure
         {
             Node<T> nodeA = GetNode(indexA);
             Node<T> nodeB = GetNode(indexB);
-            T temp = nodeA.Data;
+            T? temp = nodeA.Data;
             nodeA.Data = nodeB.Data;
             nodeB.Data = temp;
         }

@@ -61,7 +61,7 @@ namespace Datastructure
                 else AddFirst(elementToInsert);
             }
         }
-        public void Set(int pos, T element)
+        public void Set(int pos, T? element)
         {
             Node<T> node = GetNode(pos);
             node.Data = element;
@@ -70,9 +70,9 @@ namespace Datastructure
         {
             return _Count;
         }
-        public List<T> GetAllNodesData()
+        public List<T?> GetAllNodesData()
         {
-            List<T> result = new();
+            List<T?> result = new();
             Node<T>? current = _Head;
             while (current != null)
             {
@@ -118,7 +118,7 @@ namespace Datastructure
             }
             return null;
         }
-        public T Get(int pos)
+        public T? Get(int pos)
         {
             if (pos > _Count || pos < 0)
                 throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
@@ -160,7 +160,7 @@ namespace Datastructure
         {
             Node<T> nodeA = GetNode(indexA);
             Node<T> nodeB = GetNode(indexB);
-            T temp = nodeA.Data;
+            T? temp = nodeA.Data;
             nodeA.Data = nodeB.Data;
             nodeB.Data = temp;
         }

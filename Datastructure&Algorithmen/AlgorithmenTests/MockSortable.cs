@@ -5,7 +5,7 @@ namespace AlgorithmenTests
     public class MockSortable<T> : ISortableDatastructure<T> where T : IComparable<T>
     {
         private readonly List<T?> _Data;
-        public MockSortable(IEnumerable<T> items) => _Data = new List<T?>(items);
+        public MockSortable(IEnumerable<T?> items) => _Data = new List<T?>(items);
         public int Count() => _Data.Count;
         public T? Get(int pos) => _Data[pos];
         public void Set(int pos, T? element) => _Data[pos] = element;
