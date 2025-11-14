@@ -8,6 +8,7 @@ namespace AlgorithmenTests
         public MockSortable(IEnumerable<T> items) => _Data = new List<T>(items);
         public int Count() => _Data.Count;
         public T Get(int pos) => _Data[pos];
+        public void Set(int pos, T element) => _Data[pos] = element;
         public void Swap(int indexA, int indexB)
         {
             var temp = _Data[indexA];

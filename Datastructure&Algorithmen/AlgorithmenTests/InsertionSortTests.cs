@@ -1,9 +1,9 @@
-using Algorithmen;
+﻿using Algorithmen;
 using Common;
 
 namespace AlgorithmenTests
 {
-    public class BubbleSortTests
+    public class InsertionSortTests
     {
         [Test]
         public void Sort_AddMultipleObjects_ObjectsSorted()
@@ -13,7 +13,7 @@ namespace AlgorithmenTests
             Person person3 = new("Stephan");
             Person? personNull = null;
             MockSortable<Person> linkedList = new MockSortable<Person>(new[] { person1, person2, person3, personNull });
-            BubbleSortStrategy<Person> sorter = new();
+            InsertionSortStrategy<Person> sorter = new();
             sorter.Sort(linkedList);
             Assert.That(linkedList.ToList(), Is.EqualTo(new List<Person> { personNull, person2, person1, person3 }));
         }
