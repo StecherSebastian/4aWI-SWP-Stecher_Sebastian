@@ -73,7 +73,7 @@ namespace Datastructure
                 else AddFirst(elementToInsert);
             }
         }
-        public void Set(int pos, T element)
+        public void Set(int pos, T? element)
         {
             Node<T> node = GetNode(pos);
             node.Data = element;

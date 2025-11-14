@@ -1,5 +1,4 @@
 ﻿using Common;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Algorithmen
 {
@@ -8,9 +7,10 @@ namespace Algorithmen
         public void Sort(ISortableDatastructure<T> d)
         {
             int count = d.Count();
+            if (count < 0) return;
             for (int i = 1; i < count; i++)
             {
-                T toSort = d.Get(i);
+                T? toSort = d.Get(i);
                 int j = i - 1;
                 while (j >= 0 && (toSort == null ? d.Get(j) != null : d.Get(j) != null && toSort.CompareTo(d.Get(j)) < 0))
                 {

@@ -14,8 +14,8 @@ namespace Algorithmen
                 swapped = false;
                 for (int i = 0; i < n - 1; i ++)
                 {
-                    T a = d.Get(i);
-                    T b = d.Get(i + 1);
+                    T? a = d.Get(i);
+                    T? b = d.Get(i + 1);
                     if (a == null && b != null)
                         continue;
                     else if (a != null && b == null)

@@ -4,7 +4,7 @@
     {
         public Node<T>? Next;
         public Node<T>? Previous;
-        public T Data = t;
+        public T? Data = t;
         public override bool Equals(object? obj)
         {
             if (obj is not Node<T> other) return false;
