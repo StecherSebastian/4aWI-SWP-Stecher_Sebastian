@@ -14,7 +14,7 @@ namespace DatastructureTests
         {
             _Person1 = new("Sebastian");
             _Person2 = new("Lukas");
-            _Person3 = new("Stephan");
+            _Person3 = new("Arnold");
             _PersonNull = null;
         }
         [Test]
@@ -33,7 +33,7 @@ namespace DatastructureTests
             });
         }
         [Test]
-        public void AddFirt_AddNull_ObjectsInCorrectOrder()
+        public void AddFirst_AddNull_ObjectsInCorrectOrder()
         {
             DoubleLinkedList<Person> linkedList = new();
             linkedList.AddFirst(_Person1);
@@ -210,6 +210,52 @@ namespace DatastructureTests
             });
         }
         [Test]
+        public void Count_AddingMultipleObjects_ReturnsCorrectNumber()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.InsertBefore(_Person1, _Person3);
+            linkedList.InsertAfter(_Person2, _PersonNull);
+            Assert.That(linkedList.Count(), Is.EqualTo(4));
+        }
+        [Test]
+        public void GetNode_ObjectExists_ReturnsNode()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            Assert.That(linkedList.GetNode(_Person2), Is.EqualTo(new Node<Person>(_Person2)));
+        }
+        [Test]
+        public void GetNode_WithPos_ReturnsNode()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_PersonNull);
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.GetNode(0), Is.EqualTo(new Node<Person>(_Person1)));
+                Assert.That(linkedList.GetNode(1), Is.EqualTo(new Node<Person>(_Person2)));
+                Assert.That(linkedList.GetNode(2), Is.EqualTo(new Node<Person>(_PersonNull)));
+            });
+        }
+        [Test]
+        public void Get_AddingMultipleObjects_ReturnsNodeData()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_PersonNull);
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.Get(0), Is.EqualTo(_Person1));
+                Assert.That(linkedList.Get(1), Is.EqualTo(_Person2));
+                Assert.That(linkedList.Get(2), Is.EqualTo(_PersonNull));
+            });
+        }
+        [Test]
         public void RemoveLast_LastDataIsNull_ObjectsInCorrectOrder()
         {
             DoubleLinkedList<Person> linkedList = new();
@@ -258,17 +304,9 @@ namespace DatastructureTests
                     Is.EqualTo(new List<Person> { _Person1, _Person3 }));
         }
         [Test]
-        public void GetNode_ObjectExists_ReturnsNode()
-        {
-            SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(_Person1);
-            linkedList.AddLast(_Person2);
-            Assert.That(linkedList.GetNode(_Person2), Is.EqualTo(new Node<Person>(_Person2)));
-        }
-        [Test]
         public void GetNode_NodeDataIsNull_ReturnsNode()
         {
-            SingleLinkedList<Person> linkedList = new();
+            DoubleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
             linkedList.AddLast(_PersonNull);
             Assert.That(linkedList.GetNode(_PersonNull), Is.EqualTo(new Node<Person>(_PersonNull)));
@@ -295,6 +333,35 @@ namespace DatastructureTests
                 Assert.That(linkedList.PosOfElement(_Person3, DoubleLinkedList<Person>.Direction.fromLast),
                     Is.EqualTo(-1));
             });
+        }
+        [Test]
+        public void Swap_SwapMultipleObjecst_ObjectsInCorrectOrder()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.AddLast(_PersonNull);
+            linkedList.Swap(1, 2);
+            linkedList.Swap(0, 3);
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromFirst),
+                    Is.EqualTo(new List<Person>() { _PersonNull, _Person3, _Person2, _Person1 }));
+                Assert.That(linkedList.GetAllNodesData(DoubleLinkedList<Person>.Direction.fromLast),
+                    Is.EqualTo(new List<Person>() { _Person1, _Person2, _Person3, _PersonNull }));
+            });
+        }
+        [Test]
+        public void Sort_AddingMultipleObjects_ObjectsSorted()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.AddLast(_PersonNull);
+            linkedList.Sort();
+            Assert.That(linkedList.GetAllNodesData(0), Is.EqualTo(new List<Person> { _PersonNull, _Person3, _Person2, _Person1 }));
         }
         [Test]
         public void PosOfElement_OneNodeDataIsNull_ObjectsWithCorrectIndex()

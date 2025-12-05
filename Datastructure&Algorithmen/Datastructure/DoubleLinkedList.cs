@@ -1,15 +1,22 @@
-﻿using Common;
+﻿using Algorithmen;
+using Common;
 
 namespace Datastructure
 {
-    public class DoubleLinkedList<T>
+    public class DoubleLinkedList<T> : ISortableDatastructure<T> where T : IComparable<T>
     {
         private Node<T>? _Head;
         private Node<T>? _Last;
+        private int _Count;
         public enum Direction
         {
             fromFirst,
             fromLast
+        }
+        private ISortStrategy<T> _SortStrategy;
+        public DoubleLinkedList(ISortStrategy<T>? sortStrategy = null)
+        {
+            _SortStrategy = sortStrategy ?? new BubbleSortStrategy<T>();
         }
         public void AddFirst(T data)
         {
@@ -20,6 +27,7 @@ namespace Datastructure
             _Head = toAdd;
             if (_Last == null)
                 _Last = _Head;
+            _Count++;
         }
         public void AddLast(T data)
         {
@@ -35,6 +43,7 @@ namespace Datastructure
                 toAdd.Previous = _Last;
                 _Last = toAdd;
             }
+            _Count++;
         }
         public void InsertAfter(T elementBefore, T elementToInsert)
         {
@@ -50,6 +59,7 @@ namespace Datastructure
                 nodeBefore.Next.Previous = nodeToInsert;
             nodeBefore.Next = nodeToInsert;
             nodeToInsert.Previous = nodeBefore;
+            _Count++;
         }
         public void InsertBefore(T elementAfter, T elementToInsert)
         {
@@ -106,6 +116,10 @@ namespace Datastructure
                 }
             }
         }
+        public int Count()
+        {
+            return _Count;
+        }
         public List<T> GetAllNodesData(Direction d)
         {
             List<T> values = new();
@@ -129,6 +143,41 @@ namespace Datastructure
                 current = current.Next;
             }
             return null;
+        }
+        public Node<T> GetNode(int pos)
+        {
+            if (pos > _Count || pos < 0)
+                throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
+            Node<T>? current = _Head;
+            for (int i = 0; i < pos; i++)
+            {
+                if (current == null)
+                    throw new InvalidOperationException("List structure is corrupted.");
+                current = current.Next;
+            }
+            if (current == null)
+                throw new InvalidOperationException("List structure is corrupted.");
+            return current;
+        }
+        public T Get(int pos)
+        {
+            if (pos > _Count || pos < _Count * -1)
+                throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
+            Node<T>? current;
+            int steps = pos < 0 ? pos + _Count : pos;
+            current = pos < 0 ? _Last : _Head;
+            for (int i = 0; i < pos; i++)
+            {
+                if (current == null)
+                    throw new InvalidOperationException("List structure is corrupted.");
+                if (pos < 0)
+                    current = current.Previous;
+                else
+                    current = current.Next;
+            }
+            if (current == null)
+                throw new InvalidOperationException("List structure is corrupted.");
+            return current.Data;
         }
         public int? PosOfElement(T element, Direction d)
         {
@@ -162,6 +211,23 @@ namespace Datastructure
                 }
             }
             return null;
+        }
+        public void Swap(int indexA, int indexB)
+        {
+            Node<T> nodeA = GetNode(indexA);
+            Node<T> nodeB = GetNode(indexB);
+            T temp = nodeA.Data;
+            nodeA.Data = nodeB.Data;
+            nodeB.Data = temp;
+        }
+        public void ChangeSortStrategy(ISortStrategy<T> sortStrategy)
+        {
+            _SortStrategy = sortStrategy;
+        }
+        public void Sort()
+        {
+            if (_Head != null)
+                _SortStrategy.Sort(this);
         }
     }
 }

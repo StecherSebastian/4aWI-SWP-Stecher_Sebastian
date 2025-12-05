@@ -1,6 +1,6 @@
 ﻿namespace Common
 {
-    public class Node<T>(T t)
+    public class Node<T>(T t) : IComparable<Node<T>>
     {
         public Node<T>? Next;
         public Node<T>? Previous;
@@ -14,6 +14,11 @@
         {
             if (Data == null) return 0;
             else return EqualityComparer<T>.Default.GetHashCode(Data);
+        }
+        public int CompareTo(Node<T>? other)
+        {
+            if (other == null) return 1;
+            else return Comparer<T>.Default.Compare(Data, other.Data);
         }
     }
 }
