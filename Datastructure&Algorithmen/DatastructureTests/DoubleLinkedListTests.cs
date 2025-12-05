@@ -220,6 +220,24 @@ namespace DatastructureTests
             Assert.That(linkedList.Count(), Is.EqualTo(4));
         }
         [Test]
+        public void Count_AddAndRemoveObjects_ReturnCorrectNumber()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(1));
+        }
+        [Test]
+        public void Count_RemoveObjectsFromEmptyList_ReturnCountZero()
+        {
+            DoubleLinkedList<Person> linkedList = new();
+            linkedList.RemoveFirst();
+            linkedList.RemoveLast();
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(0));
+        }
+        [Test]
         public void GetNode_ObjectExists_ReturnsNode()
         {
             DoubleLinkedList<Person> linkedList = new();

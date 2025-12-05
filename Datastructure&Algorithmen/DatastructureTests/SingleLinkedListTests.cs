@@ -134,16 +134,6 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _PersonNull, _Person1 }));
         }
         [Test]
-        public void Count_AddingMultipleObjects_ReturnsCorrectNumber()
-        {
-            SingleLinkedList<Person> linkedList = new();
-            linkedList.AddLast(_Person1);
-            linkedList.AddFirst(_Person2);
-            linkedList.InsertBefore(_Person1, _Person3);
-            linkedList.InsertAfter(_Person2, _PersonNull);
-            Assert.That(linkedList.Count(), Is.EqualTo(4));
-        }
-        [Test]
         public void RemoveFirst_RemovesHead_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
@@ -192,6 +182,34 @@ namespace DatastructureTests
             linkedList.AddLast(_Person3);
             linkedList.Remove(_PersonNull);
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person3 }));
+        }
+        [Test]
+        public void Count_AddingMultipleObjects_ReturnsCorrectNumber()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.InsertBefore(_Person1, _Person3);
+            linkedList.InsertAfter(_Person2, _PersonNull);
+            Assert.That(linkedList.Count(), Is.EqualTo(4));
+        }
+        [Test]
+        public void Count_AddAndRemoveObjects_ReturnCorrectNumber()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(1));
+        }
+        [Test]
+        public void Count_RemoveObjectsFromEmptyList_ReturnCountZero()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.RemoveFirst();
+            linkedList.RemoveLast();
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(0));
         }
         [Test]
         public void GetAllNodesData_AddMultipleObjects_ReturnsListObjects()
