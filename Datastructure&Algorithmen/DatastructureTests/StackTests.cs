@@ -2,7 +2,7 @@
 
 namespace DatastructureTests
 {
-    public class StackUnitTests
+    public class StackTests
     {
         private Person _Person1;
         private Person _Person2;
@@ -47,6 +47,34 @@ namespace DatastructureTests
             stack.Push(_Person2);
             stack.Pop();
             Assert.That(stack.Size(), Is.EqualTo(1));
+        }
+        [Test]
+        public void IsEmpty_EmptyStack_ReturnsTrue()
+        {
+            Datastructure.Stack<Person> stack = new();
+            Assert.That(stack.IsEmpty(), Is.True);
+        }
+        [Test]
+        public void IsEmpty_NotEmptyStack_ReturnsFalse()
+        {
+            Datastructure.Stack<Person> stack = new();
+            stack.Push(_Person1);
+            Assert.That(stack.IsEmpty(), Is.False);
+        }
+        [Test]
+        public void Top_PushAndPopObjects_ReturnCorrectTop()
+        {
+            Datastructure.Stack<Person> stack = new();
+            stack.Push(_Person1);
+            stack.Push(_Person2);
+            stack.Pop();
+            Assert.That(stack.Top(), Is.EqualTo(_Person1));
+        }
+        [Test]
+        public void Top_EmptyStack_ThrowInvalidOperationException()
+        {
+            Datastructure.Stack<Person> stack = new();
+            Assert.Throws<InvalidOperationException>(() => stack.Top());
         }
     }
 }

@@ -23,6 +23,8 @@
             _List.Count() == 0;
         public T Top()
         {
+            if (IsEmpty())
+                throw new InvalidOperationException("Cannot pop from empty stack");
             return _List.Get(Size() - 1);
         }
     }
