@@ -6,7 +6,7 @@ namespace Datastructure
     public class SingleLinkedList<T> : ISortableDatastructure<T> where T : IComparable<T>
     {
         private Node<T>? _Head;
-        private Node<T> _Last = null!;
+        private Node<T>? _Last;
         private int _Count;
         private ISortStrategy<T> _SortStrategy;
         public SingleLinkedList(ISortStrategy<T>? sortStrategy = null)
@@ -32,8 +32,11 @@ namespace Datastructure
             else
             {
                 Node<T> toAdd = new(data);
-                _Last.Next = toAdd;
-                _Last = toAdd;
+                if (_Last != null)
+                {
+                    _Last.Next = toAdd;
+                    _Last = toAdd;
+                }
             }
             _Count++;
         }
@@ -65,6 +68,52 @@ namespace Datastructure
         {
             return _Count;
         }
+        public void RemoveFirst()
+        {
+            if (_Head != null)
+            {
+                _Head = _Head.Next;
+                if (_Head == null)
+                    _Last = null;
+            }
+        }
+        public void RemoveLast()
+        {
+            if (_Last != null)
+            {
+                if (_Head == _Last)
+                {
+                    _Head = null;
+                    _Last = null;
+                }
+                else
+                {
+                    Node<T>? nodeBefore = GetNodeBefore(_Last.Data);
+                    if (nodeBefore != null)
+                    {
+                        nodeBefore.Next = null;
+                        _Last = nodeBefore;
+                    }
+                }
+            }
+        }
+        public void Remove(T element)
+        {
+            Node<T>? nodeToRemove = GetNode(element);
+            if (nodeToRemove != null)
+            {
+                if (nodeToRemove.Equals(_Head))
+                    RemoveFirst();
+                else if (nodeToRemove.Equals(_Last))
+                    RemoveLast();
+                else
+                {
+                    Node<T>? nodeBefore = GetNodeBefore(element);
+                    if (nodeBefore != null)
+                        nodeBefore.Next = nodeToRemove.Next;
+                }
+            }
+        }
         public List<T> GetAllNodesData()
         {
             List<T> result = new();
@@ -82,6 +131,8 @@ namespace Datastructure
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(toFind))
+                    return current;
+                else if (current.Data == null && toFind == null)
                     return current;
                 current = current.Next;
             }
@@ -109,6 +160,8 @@ namespace Datastructure
             {
                 if (current.Next != null && current.Next.Data != null && current.Next.Data.Equals(toFind))
                     return current;
+                else if (current.Next != null && current.Next.Data == null && toFind == null)
+                    return current;
                 current = current.Next;
             }
             return null;
@@ -134,6 +187,8 @@ namespace Datastructure
             {
                 if (current.Data != null && current.Data.Equals(toFind))
                     return true;
+                else if (current.Data == null && toFind == null)
+                    return true;
                 current = current.Next;
             }
             return false;
@@ -145,6 +200,8 @@ namespace Datastructure
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(toFind))
+                    return count;
+                else if (current.Data == null && toFind == null)
                     return count;
                 current = current.Next;
                 count++;
