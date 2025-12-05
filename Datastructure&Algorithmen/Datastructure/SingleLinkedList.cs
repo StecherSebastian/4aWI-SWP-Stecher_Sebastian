@@ -64,10 +64,6 @@ namespace Datastructure
                 else AddFirst(elementToInsert);
             }
         }
-        public int Count()
-        {
-            return _Count;
-        }
         public void RemoveFirst()
         {
             if (_Head != null)
@@ -75,6 +71,7 @@ namespace Datastructure
                 _Head = _Head.Next;
                 if (_Head == null)
                     _Last = null;
+                _Count--;
             }
         }
         public void RemoveLast()
@@ -95,6 +92,7 @@ namespace Datastructure
                         _Last = nodeBefore;
                     }
                 }
+                _Count--;
             }
         }
         public void Remove(T element)
@@ -111,8 +109,13 @@ namespace Datastructure
                     Node<T>? nodeBefore = GetNodeBefore(element);
                     if (nodeBefore != null)
                         nodeBefore.Next = nodeToRemove.Next;
+                    _Count--;
                 }
             }
+        }
+        public int Count()
+        {
+            return _Count;
         }
         public List<T> GetAllNodesData()
         {
@@ -143,7 +146,7 @@ namespace Datastructure
             if (pos > _Count || pos < 0)
                 throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
             Node<T>? current = _Head;
-            for (int i = 0;  i < pos; i++)
+            for (int i = 0; i < pos; i++)
             {
                 if (current == null)
                     throw new InvalidOperationException("List structure is corrupted.");
@@ -171,7 +174,8 @@ namespace Datastructure
             if (pos > _Count || pos < 0)
                 throw new ArgumentOutOfRangeException(nameof(pos), "Position is out of range.");
             Node<T>? current = _Head;
-            for (int i = 0; i < pos; i++) {
+            for (int i = 0; i < pos; i++)
+            {
                 if (current == null)
                     throw new InvalidOperationException("List structure is corrupted.");
                 current = current.Next;

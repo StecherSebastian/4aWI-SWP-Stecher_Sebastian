@@ -82,6 +82,7 @@ namespace Datastructure
                     _Head.Previous = null;
                 if (_Head == null)
                     _Last = null;
+                _Count--;
             }
         }
         public void RemoveLast()
@@ -98,6 +99,7 @@ namespace Datastructure
                     _Last.Previous.Next = null;
                     _Last = _Last.Previous;
                 }
+                _Count--;
             }
         }
         public void Remove(T element)
@@ -113,6 +115,7 @@ namespace Datastructure
                 {
                     nodeToRemove.Next.Previous = nodeToRemove.Previous;
                     nodeToRemove.Previous.Next = nodeToRemove.Next;
+                    _Count--;
                 }
             }
         }
