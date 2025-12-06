@@ -2,19 +2,19 @@
 {
     public class Stack<T> where T : IComparable<T>
     {
-        private DoubleLinkedList<T> _List;
+        private SingleLinkedList<T> _List;
         public Stack() 
         {
-            _List = new DoubleLinkedList<T>();
+            _List = new SingleLinkedList<T>();
         }
         public void Push(T data) =>
-            _List.AddLast(data);
+            _List.AddFirst(data);
         public T Pop()
         {
             if (IsEmpty())
                 throw new InvalidOperationException("Cannot pop from empty stack");
-            T removed = _List.Get(Size() - 1);
-            _List.RemoveLast();
+            T removed = Top();
+            _List.RemoveFirst();
             return removed;
         }
         public int Size() =>
@@ -25,7 +25,7 @@
         {
             if (IsEmpty())
                 throw new InvalidOperationException("Cannot pop from empty stack");
-            return _List.Get(Size() - 1);
+            return _List.Get(0);
         }
     }
 }
