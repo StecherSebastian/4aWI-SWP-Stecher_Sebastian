@@ -134,6 +134,16 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _PersonNull, _Person1 }));
         }
         [Test]
+        public void Set_ValidPosition_UpdatesNodeData()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.Set(1, _PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person3 }));
+        }
+        [Test]
         public void RemoveFirst_RemovesHead_ObjectsInCorrectOrder()
         {
             SingleLinkedList<Person> linkedList = new();
