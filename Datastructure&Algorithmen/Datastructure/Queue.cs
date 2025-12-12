@@ -7,11 +7,13 @@
             _List = new SingleLinkedList<T>();
         public void Enqueue(T item) =>
             _List.AddLast(item);
-        public void Dequeue()
+        public T? Dequeue()
         {
             if (IsEmpty())
                 throw new InvalidOperationException("Cannot dequeue from empty queue");
+            T? removed = Peek();
             _List.RemoveFirst();
+            return removed;
         }
         public T? Peek()
         {
