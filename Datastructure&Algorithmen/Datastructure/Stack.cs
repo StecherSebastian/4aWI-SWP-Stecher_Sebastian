@@ -24,7 +24,7 @@
         public T Top()
         {
             if (IsEmpty())
-                throw new InvalidOperationException("Cannot pop from empty stack");
+                throw new InvalidOperationException("Cannot get top from empty stack");
             return _List.Get(0);
         }
     }
