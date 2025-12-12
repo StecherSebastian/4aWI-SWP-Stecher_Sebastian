@@ -6,7 +6,7 @@ namespace Datastructure
     public class DoubleLinkedList<T> : ISortableDatastructure<T> where T : IComparable<T>
     {
         private Node<T>? _Head;
-        private Node<T> _Last = null!;
+        private Node<T>? _Last;
         private int _Count;
         public enum Direction
         {
@@ -37,7 +37,7 @@ namespace Datastructure
                 _Head = toAdd;
                 _Last = _Head;
             }
-            else
+            else if (_Last != null)
             {
                 _Last.Next = toAdd;
                 toAdd.Previous = _Last;
@@ -78,6 +78,52 @@ namespace Datastructure
             Node<T> node = GetNode(pos);
             node.Data = element;
         }
+        public void RemoveFirst()
+        {
+            if (_Head != null)
+            {
+                _Head = _Head.Next;
+                if (_Head != null)
+                    _Head.Previous = null;
+                if (_Head == null)
+                    _Last = null;
+                _Count--;
+            }
+        }
+        public void RemoveLast()
+        {
+            if (_Last != null)
+            {
+                if (_Head == _Last)
+                {
+                    _Head = null;
+                    _Last = null;
+                }
+                else if (_Last.Previous != null)
+                {
+                    _Last.Previous.Next = null;
+                    _Last = _Last.Previous;
+                }
+                _Count--;
+            }
+        }
+        public void Remove(T element)
+        {
+            Node<T>? nodeToRemove = GetNode(element);
+            if (nodeToRemove != null)
+            {
+                if (nodeToRemove.Equals(_Head))
+                    RemoveFirst();
+                else if (nodeToRemove.Equals(_Last))
+                    RemoveLast();
+                else if (nodeToRemove.Previous != null && nodeToRemove.Next != null )
+                {
+                    nodeToRemove.Next.Previous = nodeToRemove.Previous;
+                    nodeToRemove.Previous.Next = nodeToRemove.Next;
+                    _Count--;
+                }
+            }
+        }
         public int Count()
         {
             return _Count;
@@ -99,6 +145,8 @@ namespace Datastructure
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(element))
+                    return current;
+                else if (current.Data == null && element == null)
                     return current;
                 current = current.Next;
             }
@@ -156,6 +204,8 @@ namespace Datastructure
             while (current != null)
             {
                 if (current.Data != null && current.Data.Equals(element))
+                    return pos;
+                else if (current.Data == null && element == null)
                     return pos;
                 if (d == Direction.fromFirst)
                 {

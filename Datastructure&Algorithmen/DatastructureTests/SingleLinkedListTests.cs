@@ -144,6 +144,56 @@ namespace DatastructureTests
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person?> { _Person1, _PersonNull, _Person3 }));
         }
         [Test]
+        public void RemoveFirst_RemovesHead_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.AddFirst(_Person3);
+            linkedList.AddFirst(_PersonNull);
+            linkedList.RemoveFirst();
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person3, _Person2, _Person1 }));
+        }
+        [Test]
+        public void RemoveLast_LastDataIsNull_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.AddLast(_Person3);
+            linkedList.AddLast(_PersonNull);
+            linkedList.RemoveLast();
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person2, _Person3 }));
+        }
+        [Test]
+        public void Remove_Head_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddFirst(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person2 }));
+        }
+        [Test]
+        public void Remove_Last_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_Person2);
+            linkedList.Remove(_Person2);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1 }));
+        }
+        [Test]
+        public void Remove_ObjectInbetween_ObjectsInCorrectOrder()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            linkedList.AddLast(_Person3);
+            linkedList.Remove(_PersonNull);
+            Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _Person1, _Person3 }));
+        }
+        [Test]
         public void Count_AddingMultipleObjects_ReturnsCorrectNumber()
         {
             SingleLinkedList<Person> linkedList = new();
@@ -152,6 +202,24 @@ namespace DatastructureTests
             linkedList.InsertBefore(_Person1, _Person3);
             linkedList.InsertAfter(_Person2, _PersonNull);
             Assert.That(linkedList.Count(), Is.EqualTo(4));
+        }
+        [Test]
+        public void Count_AddAndRemoveObjects_ReturnCorrectNumber()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddFirst(_Person2);
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(1));
+        }
+        [Test]
+        public void Count_RemoveObjectsFromEmptyList_ReturnCountZero()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.RemoveFirst();
+            linkedList.RemoveLast();
+            linkedList.Remove(_Person1);
+            Assert.That(linkedList.Count(), Is.EqualTo(0));
         }
         [Test]
         public void GetAllNodesData_AddMultipleObjects_ReturnsListObjects()
@@ -184,6 +252,14 @@ namespace DatastructureTests
             });
         }
         [Test]
+        public void GetNode_NodeDataIsNull_ReturnsNode()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            Assert.That(linkedList.GetNode(_PersonNull), Is.EqualTo(new Node<Person>(_PersonNull)));
+        }
+        [Test]
         public void GetNodeBefore_ObjectExists_ReturnsNode()
         {
             SingleLinkedList<Person> linkedList = new();
@@ -206,12 +282,28 @@ namespace DatastructureTests
             });
         }
         [Test]
+        public void GetNodeBefore_NodeDataIsNull_ReturnsNode()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            Assert.That(linkedList.GetNodeBefore(_PersonNull), Is.EqualTo(new Node<Person>(_Person1)));
+        }
+        [Test]
         public void Contains_ObjectExists_ReturnsTrue()
         {
             SingleLinkedList<Person> linkedList = new();
             linkedList.AddLast(_Person1);
             linkedList.AddLast(_Person2);
             Assert.That(linkedList.Contains(_Person2), Is.True);
+        }
+        [Test]
+        public void Contains_NodeDataIsNull_ReturnsTrue()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            Assert.That(linkedList.Contains(_PersonNull), Is.True);
         }
         [Test]
         public void PosOfElement_AddMultipleObjects_ReturnsCorrectPosition()
@@ -247,6 +339,18 @@ namespace DatastructureTests
             linkedList.AddLast(_PersonNull);
             linkedList.Sort();
             Assert.That(linkedList.GetAllNodesData(), Is.EqualTo(new List<Person> { _PersonNull, _Person2, _Person1, _Person3 }));
+        }
+        [Test]
+        public void PosOfElement_OneNodeDataIsNull_ReturnsCorrectPosition()
+        {
+            SingleLinkedList<Person> linkedList = new();
+            linkedList.AddLast(_Person1);
+            linkedList.AddLast(_PersonNull);
+            Assert.Multiple(() =>
+            {
+                Assert.That(linkedList.PosOfElement(_Person1), Is.EqualTo(0));
+                Assert.That(linkedList.PosOfElement(_PersonNull), Is.EqualTo(1));
+            });
         }
     }
 }
