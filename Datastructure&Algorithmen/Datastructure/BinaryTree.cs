@@ -38,5 +38,18 @@ namespace Datastructure
             }
             return _Root;
         }
+        public List<T?> Traversal()
+        {
+            List<T?> treeData = new();
+            TraversalHelper(_Root, treeData);
+            return treeData;
+        }
+        private void TraversalHelper(Node<T>? node, List<T?> result)
+        {
+            if (node == null) return;
+            result.Add(node.Data);
+            TraversalHelper(node.Left, result);
+            TraversalHelper(node.Right, result);
+        }
     }
 }
