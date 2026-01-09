@@ -2,8 +2,7 @@
 {
     public class Node<T>(T t) : IComparable<Node<T>>
     {
-        public Node<T>? Next;
-        public Node<T>? Previous;
+        public Node<T>? Next, Previous, Left, Right;
         public T? Data = t;
         public override bool Equals(object? obj)
         {
