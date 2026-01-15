@@ -26,4 +26,14 @@ public class BinaryTreeTests
         binaryTree.Insert(_Person3);
         Assert.That(binaryTree.Traversal(), Is.EqualTo(new List<Person>() { _Person1, _Person2, _Person3 }));
     }
+    [Test]
+    public void Delete_MultipleObjects_Return()
+    {
+        BinaryTree<Person> binaryTree = new();
+        binaryTree.Insert(_Person1);
+        binaryTree.Insert(_Person2);
+        binaryTree.Insert(_Person3);
+        binaryTree.Delete(_Person2);
+        Assert.That(binaryTree.Traversal(), Is.EqualTo(new List<Person>() { _Person1, _Person3 }));
+    }
 }
