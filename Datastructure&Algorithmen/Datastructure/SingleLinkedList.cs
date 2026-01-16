@@ -8,10 +8,10 @@ namespace Datastructure
         private Node<T>? _Head;
         private Node<T>? _Last;
         private int _Count;
-        private ISortStrategy<T> _SortStrategy;
-        public SingleLinkedList(ISortStrategy<T>? sortStrategy = null)
+        private Algorithm<T> _SortAlgorithm;
+        public SingleLinkedList(AlgorithmFactory<T> algorithmFactory)
         {
-            _SortStrategy = sortStrategy ?? new BubbleSortStrategy<T>();
+            _SortAlgorithm = algorithmFactory.CreateAlgorithm();
         }
         public void AddFirst(T data)
         {
@@ -225,14 +225,14 @@ namespace Datastructure
             nodeA.Data = nodeB.Data;
             nodeB.Data = temp;
         }
-        public void ChangeSortStrategy(ISortStrategy<T> sortStrategy)
+        public void ChangeAlgorithmFactory(AlgorithmFactory<T> algorithmFactory)
         {
-            _SortStrategy = sortStrategy;
+            _SortAlgorithm = algorithmFactory.CreateAlgorithm();
         }
         public void Sort()
         {
             if (_Head != null)
-                _SortStrategy.Sort(this);
+                _SortAlgorithm.Sort(this);
         }
     }
 }
