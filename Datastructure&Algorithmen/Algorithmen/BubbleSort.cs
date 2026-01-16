@@ -2,7 +2,7 @@
 
 namespace Algorithmen
 {
-    internal class BubbleSort<T> : Algorithm<T> where T : IComparable
+    internal class BubbleSort<T> : Algorithm<T> where T : IComparable<T>
     {
         public override void Sort(ISortableDatastructure<T> d)
         {

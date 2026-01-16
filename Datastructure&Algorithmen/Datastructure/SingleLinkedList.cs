@@ -9,9 +9,12 @@ namespace Datastructure
         private Node<T>? _Last;
         private int _Count;
         private Algorithm<T> _SortAlgorithm;
-        public SingleLinkedList(AlgorithmFactory<T> algorithmFactory)
+        public SingleLinkedList(AlgorithmFactory<T>? algorithmFactory = null)
         {
-            _SortAlgorithm = algorithmFactory.CreateAlgorithm();
+            if (algorithmFactory != null)
+                _SortAlgorithm = algorithmFactory.CreateAlgorithm();
+            else
+                _SortAlgorithm =  new BubbleSortFactory<T>().CreateAlgorithm();
         }
         public void AddFirst(T data)
         {
