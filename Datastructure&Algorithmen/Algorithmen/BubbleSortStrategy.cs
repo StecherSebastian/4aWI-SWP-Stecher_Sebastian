@@ -33,5 +33,40 @@ namespace Algorithmen
             }
             while (swapped);
         }
+        public void Sort(IList<T> d)
+        {
+            int n = d.Count();
+            if (n <= 0) return;
+            bool swapped;
+            do
+            {
+                swapped = false;
+                for (int i = 0; i < n - 1; i++)
+                {
+                    T? a = d[i];
+                    T? b = d[i];
+                    if (a == null && b != null)
+                        continue;
+                    else if (a != null && b == null)
+                    {
+                        a = d[i];
+                        b = d[i + 1];
+                        d[i] = b;
+                        d[i + 1] = a;
+                        swapped = true;
+                        continue;
+                    }
+                    else if (a != null && b != null && a.CompareTo(b) > 0)
+                    {
+                        a = d[i];
+                        b = d[i + 1];
+                        d[i] = b;
+                        d[i + 1] = a;
+                        swapped = true;
+                    }
+                }
+            }
+            while (swapped);
+        }
     }
 }

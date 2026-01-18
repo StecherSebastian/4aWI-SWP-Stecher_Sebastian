@@ -20,5 +20,21 @@ namespace Algorithmen
                 d.Set(j + 1, toSort);
             }
         }
+        public void Sort(IList<T> d)
+        {
+            int count = d.Count();
+            if (count < 0) return;
+            for (int i = 1; i < count; i++)
+            {
+                T? toSort = d[i];
+                int j = i - 1;
+                while (j >= 0 && (toSort == null ? d[j] != null : d[j] != null && toSort.CompareTo(d[j]) < 0))
+                {
+                    d[j + 1] = d[j];
+                    j--;
+                }
+                d[j + 1] = toSort;
+            }
+        }
     }
 }
