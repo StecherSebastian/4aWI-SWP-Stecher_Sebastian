@@ -16,8 +16,11 @@ namespace Algorithmen
             int n = d.Count();
             if (n <= 1)
                 return;
-            T min = d.Get(0)!;
-            T max = d.Get(0)!;
+            T? first = d.Get(0);
+            if (first is null)
+                throw new InvalidOperationException("Null values are not supported for numeric sorting.");
+            T min = first;
+            T max = first;
             for (int i = 1; i < n; i++)
             {
                 T value = d.Get(i)!;
